@@ -1,7 +1,6 @@
-import React, { useContext } from "react"
+import React from "react"
 import styled from "styled-components"
 import Container from "./Container"
-import LangContext from "../context/langContext"
 
 const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.primary};
@@ -19,12 +18,10 @@ const Wrapper = styled.div`
 `
 
 const Header = () => {
-  const { data } = useContext(LangContext)
-
   return (
     <Wrapper>
       <Container>
-        <h2>{data.title}</h2>
+        <h2>מילון באנגלית</h2>
       </Container>
     </Wrapper>
   )
