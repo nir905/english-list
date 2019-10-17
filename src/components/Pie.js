@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styled, { keyframes } from "styled-components"
 import dictionary from "../data/dictionary"
 
@@ -36,9 +36,13 @@ const Svg = styled.svg`
 `
 
 const Pie = () => {
-  const wordsProgress = (localStorage.getItem("words") || []).length
+  const [wordsProgress, setWordsProgress] = useState(0)
   const total = Object.keys(dictionary).length
-  const percentage = (wordsProgress * 100) / total
+  const percentage = Math.ceil((wordsProgress * 100) / total)
+
+  useEffect(() => {
+    setWordsProgress((localStorage.getItem("words") || []).length)
+  }, [])
 
   return (
     <>
@@ -58,7 +62,7 @@ const Pie = () => {
             stroke="#efefef"
             fill="none"
           />
-          <text x="50%" y="-44%" text-anchor="middle">{`${percentage}%`}</text>
+          <text x="50%" y="-44%" textAnchor="middle">{`${percentage}%`}</text>
 
           <circle
             r="69.85699"

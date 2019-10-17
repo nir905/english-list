@@ -1,7 +1,6 @@
-import React from "react"
 import styled from "styled-components"
 
-const Wrapper = styled.button`
+const Button = styled.button`
   border: none;
   background-color: ${({ theme }) => theme.primary};
   color: ${({ theme }) => theme.white};
@@ -10,10 +9,7 @@ const Wrapper = styled.button`
   cursor: pointer;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.13), 1px 2px 2px rgba(0, 0, 0, 0.1),
     -1px -2px 2px rgba(0, 0, 0, 0.05);
+  text-decoration: none;
 `
-
-const Button = ({ className, children }) => (
-  <Wrapper className={className}>{children}</Wrapper>
-)
 
 export default Button

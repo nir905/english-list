@@ -4,11 +4,11 @@ import GlobalStyle from "../style/GlobalStyle"
 import Header from "./Header"
 import theme from "../style/theme"
 
-const Layout = ({ children }) => (
+const Layout = ({ backButton, children }) => (
   <ThemeProvider theme={theme}>
     <>
       <GlobalStyle />
-      <Header />
+      <Header backButton={backButton} />
       {children}
     </>
   </ThemeProvider>

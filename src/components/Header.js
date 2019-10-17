@@ -1,6 +1,8 @@
 import React from "react"
 import styled from "styled-components"
-import Container from "./Container"
+import { Link } from "gatsby"
+import BaseContainer from "./Container"
+import ArrowIcon from "../static/icons/arrow.svg"
 
 const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.primary};
@@ -17,13 +19,28 @@ const Wrapper = styled.div`
   }
 `
 
-const Header = () => {
-  return (
-    <Wrapper>
-      <Container>
-        <h2>מילון באנגלית</h2>
-      </Container>
-    </Wrapper>
-  )
-}
+const Container = styled(BaseContainer)`
+  position: relative;
+`
+
+const Arrow = styled(ArrowIcon)`
+  position: absolute;
+  top: -2px;
+  left: 10px;
+  padding: 1rem;
+`
+
+const Header = ({ backButton }) => (
+  <Wrapper>
+    <Container>
+      {backButton && (
+        <Link to="/">
+          <Arrow />
+        </Link>
+      )}
+
+      <h2>מילון באנגלית</h2>
+    </Container>
+  </Wrapper>
+)
 export default Header
