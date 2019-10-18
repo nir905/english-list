@@ -66,14 +66,17 @@ const AnswerButtonArea = styled.div`
 const QuestionBox = ({ wordsInRound, index, onDontKnowWord, onKnowWord, onHideWord }) => {
   const [show, setShow] = useState(false)
   const speech = useMemo(() => new Speech(), [])
-  const isSupportSpeaker = useMemo(() => speech.hasBrowserSupport(), [])
 
   useEffect(() => setShow(false), [index])
 
   const handleSpeakerClick = useCallback(
     event => {
       event.stopPropagation()
-      speech.speak({ text: wordsInRound[index] })
+      try {
+        speech.speak({ text: wordsInRound[index] })
+      } catch (err) {
+        console.log("Speaker not supported")
+      }
     },
     [index]
   )
@@ -81,7 +84,7 @@ const QuestionBox = ({ wordsInRound, index, onDontKnowWord, onKnowWord, onHideWo
   return (
     <Wrapper>
       <Question onClick={() => setShow(true)}>
-        {isSupportSpeaker && <Speaker onClick={handleSpeakerClick} />}
+        <Speaker onClick={handleSpeakerClick} />
         {wordsInRound[index]}
       </Question>
 
