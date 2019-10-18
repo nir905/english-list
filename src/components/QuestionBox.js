@@ -71,17 +71,16 @@ const QuestionBox = ({ wordsInRound, index, onDontKnowWord, onKnowWord, onHideWo
   useEffect(() => setShow(false), [index])
 
   useEffect(() => {
-    speech.current = new Speech()
+    const tempSpeech = new Speech()
+    if (tempSpeech.hasBrowserSupport()) {
+      speech.current = tempSpeech
+    }
   }, [])
 
   const handleSpeakerClick = useCallback(
     event => {
       event.stopPropagation()
-      try {
-        speech.current.speak({ text: wordsInRound[index] })
-      } catch (err) {
-        console.log("Speaker not supported")
-      }
+      speech.current.speak({ text: wordsInRound[index] })
     },
     [wordsInRound, index]
   )
@@ -89,7 +88,7 @@ const QuestionBox = ({ wordsInRound, index, onDontKnowWord, onKnowWord, onHideWo
   return (
     <Wrapper>
       <Question onClick={() => setShow(true)}>
-        <Speaker onClick={handleSpeakerClick} />
+        {speech.current && <Speaker onClick={handleSpeakerClick} />}
         {wordsInRound[index]}
       </Question>
 
