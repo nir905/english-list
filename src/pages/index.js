@@ -21,7 +21,7 @@ const GoToDictionaryButton = styled(Button)`
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Home" />
+    <SEO title="דף בית"/>
 
     <Container>
       <FlexColumnCenter>

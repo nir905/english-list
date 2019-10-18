@@ -1,9 +1,12 @@
 import React from "react"
 import styled from "styled-components"
+import { Link } from "gatsby"
 import Layout from "../components/Layout"
+import SEO from "../components/SEO"
 import BaseContainer from "../components/Container"
 import Button from "../components/Button"
 import { FlexMiddle, FlexColumn } from "../components/Flex"
+import rounds from "../data/rounds"
 
 const Container = styled(BaseContainer)`
   text-align: center;
@@ -15,12 +18,12 @@ const Title = styled.h3`
 `
 
 const Option = styled(Button)`
-  width: 100%;
+  display: block;
   font-size: 1.3rem;
 `
 
 const Note = styled(FlexColumn)`
-  margin: 4rem -1px;
+  margin: 4rem -1px 0;
   font-size: 0.8rem;
   direction: rtl;
 `
@@ -32,15 +35,17 @@ const Background = styled.div`
   margin: 3px 5px;
 `
 
-const options = [10, 20, 30, 50]
-
 const Dictionary = () => {
   return (
     <Layout backButton>
+      <SEO title="מילון" />
+
       <Container small>
         <Title>בחר מספר מילים לסיבוב</Title>
-        {options.map(option => (
-          <Option key={option}>{option}</Option>
+        {rounds.map(option => (
+          <Option key={option} as={Link} to={`/dictionary/${option}`}>
+            {option}
+          </Option>
         ))}
 
         <Note>

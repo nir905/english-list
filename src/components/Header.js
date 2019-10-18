@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import { Link } from "gatsby"
 import BaseContainer from "./Container"
 import ArrowIcon from "../static/icons/arrow.svg"
 
@@ -33,11 +32,7 @@ const Arrow = styled(ArrowIcon)`
 const Header = ({ backButton }) => (
   <Wrapper>
     <Container>
-      {backButton && (
-        <Link to="/">
-          <Arrow />
-        </Link>
-      )}
+      {backButton && <Arrow onClick={() => window.history.back()} />}
 
       <h2>מילון באנגלית</h2>
     </Container>

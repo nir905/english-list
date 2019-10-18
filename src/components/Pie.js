@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import styled, { keyframes } from "styled-components"
 import dictionary from "../data/dictionary"
+import { loadWords } from "../utils/wordsInLocalStorage"
 
 const Title = styled.h3`
   margin-bottom: 3rem;
@@ -41,7 +42,8 @@ const Pie = () => {
   const percentage = Math.ceil((wordsProgress * 100) / total)
 
   useEffect(() => {
-    setWordsProgress((localStorage.getItem("words") || []).length)
+    const hiddenWords = loadWords()
+    setWordsProgress(hiddenWords.length)
   }, [])
 
   return (

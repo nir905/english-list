@@ -2,13 +2,13 @@ import { createGlobalStyle } from "styled-components"
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700&display=swap');
-  @import url('https://fonts.googleapis.com/css?family=Arimo&display=swap');
+  @import url('https://fonts.googleapis.com/earlyaccess/opensanshebrew.css');
 
   body {
     margin:0;
     padding:0;
     font-size: 62.5%;
-    font-family: 'Source Sans Pro','Arimo', sans-serif;
+    font-family: 'Source Sans Pro',"Open Sans Hebrew", sans-serif;
   }
 
   h1 {
