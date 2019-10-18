@@ -34,6 +34,11 @@ const Svg = styled.svg`
     font-size: 2rem;
     fill: #6b6666;
   }
+
+  text.numbers{
+    font-size: 1rem;
+    fill: #6b6666;
+  }
 `
 
 const Pie = () => {
@@ -49,31 +54,13 @@ const Pie = () => {
   return (
     <>
       <Title>ההתקדמות שלך</Title>
-      <Svg
-        width="160"
-        height="160"
-        xmlns="http://www.w3.org/2000/svg"
-        percentage={percentage}
-      >
+      <Svg width="160" height="160" xmlns="http://www.w3.org/2000/svg" percentage={percentage}>
         <g>
-          <circle
-            r="69.85699"
-            cy="81"
-            cx="81"
-            strokeWidth="8"
-            stroke="#efefef"
-            fill="none"
-          />
-          <text x="50%" y="-44%" textAnchor="middle">{`${percentage}%`}</text>
+          <circle r="69.85699" cy="81" cx="81" strokeWidth="8" stroke="#efefef" fill="none" />
+          <text x="50%" y="-50%" textAnchor="middle">{`${percentage}%`}</text>
+          <text x="50%" y="-34%" textAnchor="middle" className="numbers">{`${wordsProgress}/${total}`}</text>
 
-          <circle
-            r="69.85699"
-            cy="81"
-            cx="81"
-            strokeWidth="8"
-            stroke="#69aff4"
-            fill="none"
-          />
+          <circle r="69.85699" cy="81" cx="81" strokeWidth="8" stroke="#69aff4" fill="none" />
         </g>
       </Svg>
     </>

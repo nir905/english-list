@@ -9,27 +9,22 @@ import dictionary from "../data/dictionary"
 import { loadWords, saveWords } from "../utils/wordsInLocalStorage"
 
 const shuffleDictionary = o => {
-  for (
-    var j, x, i = o.length;
-    i;
-    j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x
-  );
+  for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
   return o
 }
 
 const Title = styled(FlexCenter)`
   position: relative;
   margin: 1rem 0 0;
-  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.13), 1px 2px 2px rgba(0, 0, 0, 0.1),
-    -1px -2px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.13), 1px 2px 2px rgba(0, 0, 0, 0.1), -1px -2px 2px rgba(0, 0, 0, 0.05);
 
   > h5 {
     position: absolute;
-		left: 1rem;
+    left: 1rem;
   }
 `
 
-const Round = ({ pageContext: { round } }) => {
+const Round = ({ pageContext: { option } }) => {
   const [wordsInRound, setWordsInRounds] = useState([])
   const [index, setIndex] = useState(null)
   const [roundNumber, setRoundNumber] = useState(1)
@@ -40,17 +35,13 @@ const Round = ({ pageContext: { round } }) => {
   // initial getting words
   useEffect(() => {
     const hiddenWords = loadWords()
-    const wordsToShow = Object.keys(dictionary).filter(
-      key => !hiddenWords.includes(key)
-    )
+    const wordsToShow = Object.keys(dictionary).filter(key => !hiddenWords.includes(key))
+    const wordsInRound = shuffleDictionary(wordsToShow).slice(0, option)
 
-    const wordsInRound = shuffleDictionary(wordsToShow).slice(0, round)
     setWordsInRounds(wordsInRound)
     setIndex(0)
 
-    if (wordsInRound.length === 0) {
-      setIsFinished(true)
-    }
+    wordsInRound.length === 0 && setIsFinished(true)
   }, []) // eslint-disable-line
 
   //after each round remove words
@@ -59,23 +50,16 @@ const Round = ({ pageContext: { round } }) => {
       return
     }
 
-    const wordsToShow = wordsInRound.filter(
-      key => !knownWords.includes(key) && !hideWords.includes(key)
-    )
-
+    const wordsToShow = wordsInRound.filter(key => !knownWords.includes(key) && !hideWords.includes(key))
     setWordsInRounds(wordsToShow)
     setIndex(0)
 
-    if (wordsToShow.length === 0) {
-      setIsFinished(true)
-    }
+    wordsToShow.length === 0 && setIsFinished(true)
   }, [roundNumber]) // eslint-disable-line
 
   //save to localStorage
   useEffect(() => {
-    if (isFinished) {
-      saveWords(hideWords)
-    }
+    isFinished && saveWords(hideWords)
   }, [isFinished]) // eslint-disable-line
 
   const nextWord = useCallback(() => {
@@ -99,7 +83,7 @@ const Round = ({ pageContext: { round } }) => {
 
   return (
     <Layout backButton>
-      <SEO title={`${round} מילים`} />
+      <SEO title={`${option} מילים`} />
       <Container>
         {isFinished ? (
           <div>Finish</div>

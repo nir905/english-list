@@ -11,7 +11,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       path: `/dictionary/${round}`,
       component: roundPage,
       context: {
-        round,
+        option: round,
       },
     })
   })
