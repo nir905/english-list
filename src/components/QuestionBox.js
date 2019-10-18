@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react"
+import React, { useState, useEffect, useCallback, useRef } from "react"
 import styled, { css, keyframes } from "styled-components"
 import Speech from "speak-tts"
 import { FlexColumn } from "./Flex"
@@ -9,6 +9,7 @@ import SpeakerIcon from "../static/icons/speaker.svg"
 const Wrapper = styled(FlexColumn)`
   margin: 0.5rem 0;
 `
+
 const box = css`
   margin: 0;
   color: ${({ theme }) => theme.white};
@@ -65,20 +66,24 @@ const AnswerButtonArea = styled.div`
 
 const QuestionBox = ({ wordsInRound, index, onDontKnowWord, onKnowWord, onHideWord }) => {
   const [show, setShow] = useState(false)
-  const speech = useMemo(() => new Speech(), [])
+  const speech = useRef(null)
 
   useEffect(() => setShow(false), [index])
+
+  useEffect(() => {
+    speech.current = new Speech()
+  }, [])
 
   const handleSpeakerClick = useCallback(
     event => {
       event.stopPropagation()
       try {
-        speech.speak({ text: wordsInRound[index] })
+        speech.current.speak({ text: wordsInRound[index] })
       } catch (err) {
         console.log("Speaker not supported")
       }
     },
-    [index]
+    [wordsInRound, index]
   )
 
   return (
