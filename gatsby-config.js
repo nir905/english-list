@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
     title: `English List | מילון באנגלית`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    description: `מילון באנגלית - ללמוד מילים באנגלית בחינם ובכל מקום`,
+    author: `Nir Avraham`,
   },
   plugins: [
     `gatsby-plugin-styled-components`,
