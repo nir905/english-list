@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback, useMemo } from "react"
 import styled, { css, keyframes } from "styled-components"
+import Speech from "speak-tts"
 import { FlexColumn } from "./Flex"
 import Button from "./Button"
 import dictionary from "../data/dictionary"
+import SpeakerIcon from "../static/icons/speaker.svg"
 
 const Wrapper = styled(FlexColumn)`
   margin: 0.5rem 0;
@@ -18,6 +20,13 @@ const box = css`
 const Question = styled.h1`
   ${box};
   background: ${({ theme }) => theme.primary};
+  position: relative;
+`
+
+const Speaker = styled(SpeakerIcon)`
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
 `
 
 const flyIn = keyframes`
@@ -54,20 +63,27 @@ const AnswerButtonArea = styled.div`
     "dontShow dontShow";
 `
 
-const QuestionBox = ({
-  wordsInRound,
-  index,
-  onDontKnowWord,
-  onKnowWord,
-  onHideWord,
-}) => {
+const QuestionBox = ({ wordsInRound, index, onDontKnowWord, onKnowWord, onHideWord }) => {
   const [show, setShow] = useState(false)
+  const speech = useMemo(() => new Speech(), [])
+  const isSupportSpeaker = useMemo(() => speech.hasBrowserSupport(), [])
 
   useEffect(() => setShow(false), [index])
 
+  const handleSpeakerClick = useCallback(
+    event => {
+      event.stopPropagation()
+      speech.speak({ text: wordsInRound[index] })
+    },
+    [index]
+  )
+
   return (
     <Wrapper>
-      <Question onClick={() => setShow(true)}>{wordsInRound[index]}</Question>
+      <Question onClick={() => setShow(true)}>
+        {isSupportSpeaker && <Speaker onClick={handleSpeakerClick} />}
+        {wordsInRound[index]}
+      </Question>
 
       {show && (
         <AnimatedPanel>
