@@ -1,5 +1,8 @@
 export const loadWords = () => {
-  const item = window && window.localStorage.getItem("words")
+  if (typeof window === "undefined") {
+    return []
+  }
+  const item = window.localStorage.getItem("words")
   if (!item) {
     return []
   }
