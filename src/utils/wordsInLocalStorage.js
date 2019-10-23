@@ -1,5 +1,5 @@
 export const loadWords = () => {
-  const item = localStorage.getItem("words")
+  const item = window && window.localStorage.getItem("words")
   if (!item) {
     return []
   }
