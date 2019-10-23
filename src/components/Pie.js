@@ -46,10 +46,10 @@ const Pie = () => {
   const total = Object.keys(dictionary).length
   const percentage = Math.ceil((wordsProgress * 100) / total)
 
+  const hiddenWords = loadWords()
   useEffect(() => {
-    const hiddenWords = loadWords()
     setWordsProgress(hiddenWords.length)
-  }, [])
+  }, [hiddenWords])
 
   return (
     <>

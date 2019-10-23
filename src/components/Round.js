@@ -5,6 +5,7 @@ import SEO from "./SEO"
 import { FlexCenter } from "./Flex"
 import Container from "./Container"
 import QuestionBox from "./QuestionBox"
+import FinishedBox from "./FinishedBox"
 import dictionary from "../data/dictionary"
 import { loadWords, saveWords } from "../utils/wordsInLocalStorage"
 
@@ -86,7 +87,7 @@ const Round = ({ pageContext: { option } }) => {
       <SEO title={`${option} מילים`} />
       <Container>
         {isFinished ? (
-          <div>Finish</div>
+          <FinishedBox/>
         ) : (
           <>
             <Title>
