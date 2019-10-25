@@ -4496,12 +4496,13 @@ gatsby-page-utils@^0.0.27:
     micromatch "^3.1.10"
     slash "^3.0.0"
 
-gatsby-plugin-google-tagmanager@^2.1.15:
-  version "2.1.15"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-tagmanager/-/gatsby-plugin-google-tagmanager-2.1.15.tgz#341d088371472a7e67a4d172d960f382feebb5d1"
-  integrity sha512-bDuMz+QnV6dcGpjBf1wPzLHEvVh8VMXi2rcr2f4MucYVf6KbU8LS9LQir3NVj/bHam47wiE28jjV/4tf0EI4mQ==
+gatsby-plugin-google-gtag@^1.1.14:
+  version "1.1.14"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-gtag/-/gatsby-plugin-google-gtag-1.1.14.tgz#08b5cde6d9d6b8c670f845871829bacf102b2a9a"
+  integrity sha512-fpCf/4uSc+mKl6/peCZ1RBUcKfy0ca5WiBr0j1g9YLEmImRfrJEzOVbSDoTmSzHrOTETWRXkb+wcClxINCNN7w==
   dependencies:
     "@babel/runtime" "^7.6.3"
+    minimatch "^3.0.4"
 
 gatsby-plugin-manifest@^2.2.23:
   version "2.2.23"

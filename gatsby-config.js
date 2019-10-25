@@ -29,11 +29,15 @@ module.exports = {
     },
     `gatsby-plugin-offline`,
     {
-      resolve: "gatsby-plugin-google-tagmanager",
+      resolve: `gatsby-plugin-google-gtag`,
       options: {
-        id: "GTM-N6QTNBC",
-        includeInDevelopment: true,
-        defaultDataLayer: { platform: "gatsby" },
+        trackingIds: ["UA-150932234-1"],
+        gtagConfig: {
+          anonymize_ip: true,
+        },
+        pluginConfig: {
+          head: false,
+        },
       },
     },
   ],
