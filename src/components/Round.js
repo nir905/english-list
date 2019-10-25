@@ -9,6 +9,10 @@ import FinishedBox from "./FinishedBox"
 import dictionary from "../data/dictionary"
 import { loadWords, saveWords } from "../utils/wordsInLocalStorage"
 
+const sendButtonEvent = eventType => {
+  window && window.gtag && window.gtag("event", "Click Button", eventType)
+}
+
 const shuffleDictionary = o => {
   for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
   return o
@@ -72,14 +76,21 @@ const Round = ({ pageContext: { option } }) => {
     }
   }, [index, roundNumber, wordsInRound])
 
+  const DontKnowWord = useCallback(() => {
+    nextWord()
+    sendButtonEvent('Don\'t Know')
+  }, [nextWord])
+
   const handleKnowWord = useCallback(() => {
     setKnownWords([...knownWords, wordsInRound[index]])
     nextWord()
+    sendButtonEvent('Know')
   }, [index, knownWords, wordsInRound, nextWord])
 
   const handleHideWord = useCallback(() => {
     setHideWords([...hideWords, wordsInRound[index]])
     nextWord()
+    sendButtonEvent('Hide')
   }, [index, hideWords, wordsInRound, nextWord])
 
   return (
@@ -87,7 +98,7 @@ const Round = ({ pageContext: { option } }) => {
       <SEO title={`${option} מילים`} />
       <Container>
         {isFinished ? (
-          <FinishedBox/>
+          <FinishedBox />
         ) : (
           <>
             <Title>
@@ -98,7 +109,7 @@ const Round = ({ pageContext: { option } }) => {
             <QuestionBox
               wordsInRound={wordsInRound}
               index={index}
-              onDontKnowWord={nextWord}
+              onDontKnowWord={DontKnowWord}
               onKnowWord={handleKnowWord}
               onHideWord={handleHideWord}
             />

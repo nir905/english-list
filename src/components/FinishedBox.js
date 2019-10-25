@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import styled from "styled-components"
 import Pie from "./Pie"
 import Button from "./Button"
@@ -19,12 +19,29 @@ const GoBackButton = styled(Button)`
   width: 60%;
 `
 
-const FinishedBox = () => (
-  <Wrapper>
-    <Title>!סיימת את הסיבוב בהצלחה</Title>
-    <Pie />
-    <GoBackButton onClick={() => window.history.back()}>חזור</GoBackButton>
-  </Wrapper>
-)
+const sendFinishedEvent = eventType => {
+  window && window.gtag && window.gtag("event", "Finished", eventType)
+}
+
+const FinishedBox = () => {
+  useEffect(() => {
+    sendFinishedEvent("Finished Round")
+  }, [])
+
+  return (
+    <Wrapper>
+      <Title>!סיימת את הסיבוב בהצלחה</Title>
+      <Pie />
+      <GoBackButton
+        onClick={() => {
+          window.history.back()
+          sendFinishedEvent("Finished Button")
+        }}
+      >
+        חזור
+      </GoBackButton>
+    </Wrapper>
+  )
+}
 
 export default FinishedBox
