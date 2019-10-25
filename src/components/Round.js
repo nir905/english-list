@@ -10,7 +10,12 @@ import dictionary from "../data/dictionary"
 import { loadWords, saveWords } from "../utils/wordsInLocalStorage"
 
 const sendButtonEvent = eventType => {
-  window && window.gtag && window.gtag("event", "Click Button", eventType)
+  window &&
+    window.gtag &&
+    window.gtag("event", "click", {
+      event_category: "Click Button",
+      event_label: eventType,
+    })
 }
 
 const shuffleDictionary = o => {
@@ -78,19 +83,19 @@ const Round = ({ pageContext: { option } }) => {
 
   const DontKnowWord = useCallback(() => {
     nextWord()
-    sendButtonEvent('Don\'t Know')
+    sendButtonEvent("Don't Know")
   }, [nextWord])
 
   const handleKnowWord = useCallback(() => {
     setKnownWords([...knownWords, wordsInRound[index]])
     nextWord()
-    sendButtonEvent('Know')
+    sendButtonEvent("Know")
   }, [index, knownWords, wordsInRound, nextWord])
 
   const handleHideWord = useCallback(() => {
     setHideWords([...hideWords, wordsInRound[index]])
     nextWord()
-    sendButtonEvent('Hide')
+    sendButtonEvent("Hide")
   }, [index, hideWords, wordsInRound, nextWord])
 
   return (

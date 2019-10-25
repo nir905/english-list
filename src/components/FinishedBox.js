@@ -20,7 +20,12 @@ const GoBackButton = styled(Button)`
 `
 
 const sendFinishedEvent = eventType => {
-  window && window.gtag && window.gtag("event", "Finished", eventType)
+  window &&
+    window.gtag &&
+    window.gtag("event", "click", {
+      event_category: "Finished",
+      event_label: eventType,
+    })
 }
 
 const FinishedBox = () => {
