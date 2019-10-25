@@ -15,6 +15,7 @@ const sendButtonEvent = eventType => {
     window.gtag("event", "click", {
       event_category: "Click Button",
       event_label: eventType,
+      value: 1,
     })
 }
 
@@ -103,7 +104,7 @@ const Round = ({ pageContext: { option } }) => {
       <SEO title={`${option} מילים`} />
       <Container>
         {isFinished ? (
-          <FinishedBox />
+          <FinishedBox option={option} />
         ) : (
           <>
             <Title>

@@ -19,32 +19,26 @@ const GoBackButton = styled(Button)`
   width: 60%;
 `
 
-const sendFinishedEvent = eventType => {
+const sendFinishedEvent = option => {
   window &&
     window.gtag &&
     window.gtag("event", "click", {
       event_category: "Finished",
-      event_label: eventType,
+      event_label: "Finished Round",
+      value: 100 * option,
     })
 }
 
-const FinishedBox = () => {
+const FinishedBox = ({ option }) => {
   useEffect(() => {
-    sendFinishedEvent("Finished Round")
+    sendFinishedEvent(option)
   }, [])
 
   return (
     <Wrapper>
       <Title>!סיימת את הסיבוב בהצלחה</Title>
       <Pie />
-      <GoBackButton
-        onClick={() => {
-          window.history.back()
-          sendFinishedEvent("Finished Button")
-        }}
-      >
-        חזור
-      </GoBackButton>
+      <GoBackButton onClick={() => window.history.back()}>חזור</GoBackButton>
     </Wrapper>
   )
 }

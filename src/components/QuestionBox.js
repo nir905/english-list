@@ -64,6 +64,16 @@ const AnswerButtonArea = styled.div`
     "dontShow dontShow";
 `
 
+const sendVoiceEvent = () => {
+  window &&
+    window.gtag &&
+    window.gtag("event", "click", {
+      event_category: "Click Button",
+      event_label: "Voice",
+      value: 10,
+    })
+}
+
 const QuestionBox = ({ wordsInRound, index, onDontKnowWord, onKnowWord, onHideWord }) => {
   const [show, setShow] = useState(false)
   const speech = useRef(null)
