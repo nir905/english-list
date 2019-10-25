@@ -91,6 +91,7 @@ const QuestionBox = ({ wordsInRound, index, onDontKnowWord, onKnowWord, onHideWo
     event => {
       event.stopPropagation()
       speech.current.speak({ text: wordsInRound[index] })
+      sendVoiceEvent()
     },
     [wordsInRound, index]
   )
